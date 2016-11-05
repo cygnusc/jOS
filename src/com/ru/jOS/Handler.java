@@ -6,11 +6,13 @@ import java.io.InputStreamReader;
 //import java.util.Scanner;
 
 public class Handler {
+	public static String currentDir;
 	Handler(String[] args) {
 		
 	}
 	
 	void run ()  throws IOException {
+		currentDir = System.getProperty("user.dir");
 		System.out.println("running...");
 		String input = "";
 		do {
@@ -19,15 +21,21 @@ public class Handler {
 			String[] cli = input.split(" ");
 			if (cli[0].equals("exit")) break;
 			if (cli[0].equals("ls")) {
-				Commandls cmd = new Commandls();
-				cmd.run(cli);
+				Commandls ls = new Commandls();
+				ls.run(cli);
 			} else if (cli[0].equals("pwd")) {
 				System.out.println(System.getProperty("user.dir"));
 			} else if (cli[0].equals("cat")) {
 				Commandcat cat = new Commandcat();
 				cat.run(cli);
+			} else if (cli[0].equals("touch")) {
+				Commandtouch touch = new Commandtouch();
+				touch.run(cli);
+			} else if (cli[0].equals("cd")) {
+				Commandcd cd = new Commandcd();
+				cd.run(cli);
 			} else {
-				System.out.println("command \"" + cli[0] + "\" not found.");
+					System.out.println("command \"" + cli[0] + "\" not found.");
 			}
 		} while (true);
 	}

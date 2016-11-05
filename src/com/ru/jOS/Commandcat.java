@@ -1,7 +1,6 @@
 package com.ru.jOS;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,7 +19,9 @@ public class Commandcat implements Command {
 			} while (!input.equals(""));
 		} else {
 			for (int i = 1; i < args.length; i++) {
-				BufferedReader br = new BufferedReader(new FileReader(args[i]));
+				BufferedReader br = new BufferedReader(
+						new FileReader(args[i].charAt(0) == '/' ? args[i] :
+								Handler.currentDir + "/" + args[i]));
 				String line;
 				while((line = br.readLine()) != null)
 				{

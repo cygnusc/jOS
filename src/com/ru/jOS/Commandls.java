@@ -12,9 +12,16 @@ public class Commandls implements Command{
 		String dirName;
 		if (args.length == 1) {
 			//dirName = ".";
-			dirName = System.getProperty("user.dir");
-		} else dirName = args[1];
+			//dirName = System.getProperty("user.dir");
+			dirName = Handler.currentDir;
+		} else dirName = args[1].charAt(0) == '/' ? args[1] : 
+			Handler.currentDir + "/" + args[1];
+		// System.out.println("displaying dir: " + dirName);
 		File directory = new File(dirName);
+		if (!directory.exists()) {
+			System.err.println("cannot find: " + dirName);
+			return 1;
+		}
 		File[] fList = directory.listFiles();
 		if (fList.length != 0) {
 			for (File f : fList) {
@@ -26,6 +33,4 @@ public class Commandls implements Command{
 		// TODO Auto-generated method stub
 		
 	}
-	
-
 }
