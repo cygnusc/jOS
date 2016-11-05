@@ -34,8 +34,11 @@ public class Handler {
 			} else if (cli[0].equals("cd")) {
 				Commandcd cd = new Commandcd();
 				cd.run(cli);
+			} else if (cli[0].equals("rm")) {
+				Command rm = new Commandrm();
+				rm.run(cli);
 			} else {
-					System.out.println("command \"" + cli[0] + "\" not found.");
+				System.out.println("command \"" + cli[0] + "\" not found.");
 			}
 		} while (true);
 	}

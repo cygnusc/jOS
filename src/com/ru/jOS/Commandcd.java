@@ -12,7 +12,8 @@ public class Commandcd implements Command {
 		if (args.length == 1) {
 			Handler.currentDir = System.getProperty("user.dir");
 		} else {
-			String dirName = Handler.currentDir + "/" + args[1];
+			String dirName = args[1].charAt(0) == '/' ? args[1] :
+				Handler.currentDir + "/" + args[1];
 			File directory = new File(dirName);
 			if (!directory.exists()) {
 				System.err.println("cannot find: " + dirName);
